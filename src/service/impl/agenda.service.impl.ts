@@ -18,7 +18,7 @@ export class AgendaServiceImpl implements AgendaService {
     if (!validacion.valido) {
       throw new Error(`Datos inválidos: ${validacion.errores.join(', ')}`);
     }
-    
+
     const hoy = new Date();
     const fechaEvento = new Date(`${createDto.fecha}T${createDto.hora}`);
     if (fechaEvento < hoy) {
@@ -27,6 +27,7 @@ export class AgendaServiceImpl implements AgendaService {
 
     const eventosExistentes = await FileSystemUtilsExtended.listarEventosPorFecha(createDto.fecha);
     const tituloNormalizado = NormalizationUtils.normalizarTitulo(createDto.titulo);
+    
     for (const evento of eventosExistentes) {
       if (NormalizationUtils.normalizarTitulo(evento.titulo) === tituloNormalizado) {
         throw new Error('Ya existe un evento con el mismo título en esa fecha');
