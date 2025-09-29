@@ -13,11 +13,11 @@ export class FileSystemUtilsExtended {
       for (const archivo of archivos) {
         if (archivo.endsWith('.md')) {
           const contenido = await fs.readFile(path.join(fechaPath, archivo), 'utf8');
-          const tituloMatch = contenido.match(/# Título\n\[(.*)\]/);
+          const tituloMatch = contenido.match(/# Título\n(.+?)\n/);
           const horaMatch = contenido.match(/## Hora\n([\d:]+)/);
           if (tituloMatch && horaMatch) {
             eventos.push(new AgendaItem(
-              tituloMatch[1],
+              tituloMatch[1].trim(),
               fecha,
               horaMatch[1],
               undefined
