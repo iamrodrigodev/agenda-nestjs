@@ -21,8 +21,12 @@ export class AgendaController {
         status: NestCommon.HttpStatus.OK
       };
     } catch (error) {
+      let mensaje = 'Error al crear el evento';
+      if (error instanceof Error) {
+        mensaje = error.message;
+      }
       throw new NestCommon.HttpException(
-        error.message || 'Error al crear el evento',
+        mensaje,
         NestCommon.HttpStatus.BAD_REQUEST
       );
     }
