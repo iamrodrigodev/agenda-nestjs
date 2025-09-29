@@ -1,6 +1,6 @@
 import * as NestCommon from '@nestjs/common';
 import { AgendaService } from '../service/agenda.service';
-import type { CreateAgendaItemDto, UpdateAgendaItemDto } from '../dto/agenda.dto';
+import type { CreateAgendaItemDto } from '../dto/agenda.dto';
 import type { AgendaItem } from '../model/agenda.model';
 
 @NestCommon.Controller('agenda')
@@ -9,14 +9,16 @@ export class AgendaController {
 
   @NestCommon.Post()
   async crearEvento(@NestCommon.Body() createDto: CreateAgendaItemDto): Promise<{
-    mensaje: string;
-    evento: AgendaItem;
+  mensaje: string;
+  evento: AgendaItem;
+  status: number;
   }> {
     try {
       const evento = await this.agendaService.crearEvento(createDto);
       return {
         mensaje: 'Evento creado exitosamente',
-        evento
+        evento,
+        status: NestCommon.HttpStatus.OK
       };
     } catch (error) {
       throw new NestCommon.HttpException(
