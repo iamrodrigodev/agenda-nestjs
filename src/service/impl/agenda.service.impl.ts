@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AgendaService } from '../agenda.service';
 import { AgendaItem } from '../../model/agenda.model';
-import { CreateAgendaItemDto, UpdateAgendaItemDto } from '../../dto/agenda.dto';
+import { CreateAgendaItemDto} from '../../dto/agenda.dto';
 import { FileSystemUtils } from '../../utils/file-system.utils';
 import { ValidationUtils } from '../../utils/validation.utils';
 
