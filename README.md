@@ -1,1 +1,1 @@
-# agenda-nestjs
+npx prettier --write "src/app.module.ts"
