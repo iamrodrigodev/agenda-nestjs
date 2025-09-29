@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AgendaController } from './controller/agenda.controller';
+import { AgendaService } from './service/agenda.service';
+import { AgendaServiceImpl } from './service/impl/agenda.service.impl';
 
 @Module({
   imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AgendaController],
+  providers: [
+    {
+      provide: AgendaService,
+      useClass: AgendaServiceImpl,
+    },
+  ],
 })
 export class AppModule {}
